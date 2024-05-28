@@ -1,7 +1,7 @@
 # Installation
 
 ```shell
-$ pip install django-viewcomponent
+$ pip install django-lookbook
 ```
 
 Then add the app into `INSTALLED_APPS` in settings.py
@@ -9,7 +9,7 @@ Then add the app into `INSTALLED_APPS` in settings.py
 ```python
 INSTALLED_APPS = [
     ...,
-    'django_viewcomponent',
+    'django_lookbook',
 ]
 ```
 
@@ -30,7 +30,7 @@ TEMPLATES = [
                 'django.template.loaders.cached.Loader', [
                     'django.template.loaders.filesystem.Loader',
                     'django.template.loaders.app_directories.Loader',
-                    'django_viewcomponent.loaders.ComponentLoader',
+                    'django_lookbook.loaders.ComponentLoader',
                 ]
             )],
         },
@@ -49,7 +49,7 @@ TEMPLATES = [
                 ...
             ],
             'builtins': [
-                'django_viewcomponent.templatetags.viewcomponent_tags',       # new
+                'django_lookbook.templatetags.viewcomponent_tags',       # new
             ]
         },
     },

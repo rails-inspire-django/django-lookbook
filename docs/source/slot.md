@@ -9,8 +9,8 @@ Unlike other packages which declare slot via `{% slot %}`, we define the slot in
 Create *components/blog/blog.py*
 
 ```python
-from django_viewcomponent import component
-from django_viewcomponent.fields import RendersOneField
+from django_lookbook import component
+from django_lookbook.fields import RendersOneField
 
 
 @component.register("blog")
@@ -65,8 +65,8 @@ You can use `filled` attribute of the slot field to check if the slot is filled 
 Let's update `BlogComponent`
 
 ```python
-from django_viewcomponent import component
-from django_viewcomponent.fields import RendersOneField, RendersManyField
+from django_lookbook import component
+from django_lookbook.fields import RendersOneField, RendersManyField
 
 
 @component.register("blog")
@@ -125,8 +125,8 @@ This is a very powerful feature, please read it carefully.
 Let's update the `BlogComponent` again
 
 ```python
-from django_viewcomponent import component
-from django_viewcomponent.fields import RendersOneField, RendersManyField
+from django_lookbook import component
+from django_lookbook.fields import RendersOneField, RendersManyField
 
 
 @component.register("header")

@@ -1,7 +1,6 @@
 import pathlib
 
 import pytest
-
 from django_viewcomponent import component
 
 
@@ -9,6 +8,8 @@ def pytest_configure():
     from django.conf import settings
 
     settings.configure(
+        # is the path of this conftest.py file
+        BASE_DIR=pathlib.Path(__file__).resolve().parent,
         SECRET_KEY="seekret",
         DATABASES={
             "default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "mem_db"},
@@ -42,6 +43,7 @@ def pytest_configure():
             "django.contrib.sessions",
             "django.contrib.sites",
             "django_viewcomponent",
+            "django_lookbook",
             "tests.testapp",
         ],
         ROOT_URLCONF="tests.testapp.urls",
@@ -57,10 +59,3 @@ def cleanup_after_each_test():
 
     # NOTE: component.registry is global, so need to clear after each test
     component.registry.clear()
-
-
-@pytest.fixture
-def post():
-    from tests.testapp.models import Post
-
-    return Post.objects.create(title="test", description="test")

@@ -9,3 +9,5 @@ pytest-django
 pytest-xdist
 pytest-mock
 jinja2
+django-viewcomponent
+parsel

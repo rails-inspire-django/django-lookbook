@@ -1,0 +1,59 @@
+{% extends 'django_lookbook/base.html' %}
+
+{% block content %}
+  <div class="overflow-auto max-h-full scroll-smooth">
+
+    <div class="px-3 h-full lg:px-0">
+
+      <div class="py-8 px-4 mb-8 bg-gray-50 border-b border-gray-200 lg:p-32 lg:py-24 lg:px-12">
+        <div class="mx-auto w-full">
+          <h1 class="font-medium text-center text-5xl">
+            Component Library
+          </h1>
+        </div>
+      </div>
+
+      <div class="container mx-auto max-w-4xl">
+        <div class="px-4 sm:px-6 xl:px-0">
+          <article>
+            <div>
+              <div class="pb-8 divide-y divide-gray-200 xl:divide-y-0 dark:divide-gray-700">
+                <div class="divide-y divide-gray-200 xl:col-span-3 xl:row-span-2 xl:pb-0 dark:divide-gray-700">
+                  <div class="pt-10 pb-8 max-w-none prose">
+                    <div>
+                      <div class="max-w-full prose">
+                        <p>This app is to help Django developers to build a powerful component library, which has a
+                          preview system, an integrated documentation engine and a parameter editor, so the team can
+                          build robust, modular and maintainable UI with Django.</p>
+                        <h2>Features</h2>
+                        <ul>
+                          <li>Auto-detect and render the previews</li>
+                          <li>Filter previews in real-time</li>
+                          <li>Draggable and resizable layout</li>
+                          <li>Auto extract documentation from the preview doc string</li>
+                          <li>Powerful parameter editor, which allow user to check UI in real-time (for
+                            example: change button text and color)
+                          </li>
+                          <li>This app is <strong>pluggable</strong> and can be integrated with any Django project</li>
+                        </ul>
+                        <h2>Special Thanks</h2>
+                        <ul>
+                          <li><a href="https://storybook.js.org/" target="_blank">Storybook</a></li>
+                          <li><a href="https://github.com/ViewComponent/lookbook" target="_blank">ViewComponent/lookbook</a></li>
+                          <li><a href="https://github.com/rails-inspire-django/django-viewcomponent" target="_blank">django-viewcomponent</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+{% endblock %}

@@ -1,0 +1,99 @@
+/* stylelint-disable no-descending-specificity */
+
+[data-component="icon"] {
+  flex: none;
+  line-height: 1;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter, backdrop-filter;
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  display: block;
+}
+
+[data-component="icon"] svg {
+  fill: #0000;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="icon"].icon-stroke-2 svg {
+  stroke-width: 2px;
+}
+
+[data-component="icon"].icon-stroke-1 svg {
+  stroke-width: 1px;
+}
+
+[data-component="lookbook-icon"] {
+  flex: none;
+  line-height: 1;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-backdrop-filter, backdrop-filter;
+  transition-duration: .15s;
+  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+  display: block;
+}
+
+[data-component="lookbook-icon"] svg {
+  fill: #0000;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  width: 100%;
+  height: 100%;
+}
+
+[data-component="lookbook-icon"].hidden {
+  display: none;
+}
+
+[data-component="lookbook-icon"].icon-stroke-2 svg {
+  stroke-width: 2px;
+}
+
+[data-component="lookbook-icon"].icon-stroke-1 svg {
+  stroke-width: 1px;
+}
+
+[data-controller="lookbook-sidebar-link"] {
+  @apply hover:bg-gray-100;
+}
+
+[data-controller="lookbook-sidebar-link"].active {
+  @apply bg-blue-100;
+}
+
+.lookbook-pre {
+  @apply h-full;
+
+  code {
+    @apply h-full;
+  }
+}
+
+/* for block of numbers */
+.hljs-ln {
+  border-collapse: collapse
+}
+
+.hljs-ln-n::before {
+  content: attr(data-line-number)
+}
+
+.hljs-ln-numbers {
+  -webkit-touch-callout: none;
+  user-select: none;
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #CCC;
+  vertical-align: top;
+  padding-right: 5px;
+}
+
+/* for block of code */
+.hljs-ln-code {
+  padding-left: 10px;
+}
+
+/* stylelint-enable no-descending-specificity */

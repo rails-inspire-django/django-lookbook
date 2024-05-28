@@ -1,4 +1,5 @@
 build:
+	npm run build
 	poetry build
 
 publish:

@@ -1,0 +1,53 @@
+{% load static %}
+
+<div
+  data-controller="lookbook-preview-filter"
+  data-action="lookbook-filter-input:preview-filter->lookbook-preview-filter#filter"
+>
+
+  <div class="p-2 pb-0">
+    <div class="relative"
+         data-controller="lookbook-filter-input"
+    >
+      <input type="text"
+             class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+             placeholder="Filter previews by name…"
+             data-action="input->lookbook-filter-input#inputChanged"
+             data-lookbook-filter-input-target="input"
+      >
+      <button
+        class="hidden absolute right-3 top-1/2 -translate-y-1/2 focus:ring-0 focus:outline-none text-lookbook-icon-button-stroke hover:text-lookbook-icon-button-stroke-hover"
+        data-action="click->lookbook-filter-input#clearFilter"
+        data-lookbook-filter-input-target="clearButton"
+      >
+        <i style="height: 0.75rem; width: 0.75rem; " class="icon-stroke-2" data-component="icon">
+          <svg>
+            <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#x"></use>
+          </svg>
+        </i>
+      </button>
+    </div>
+  </div>
+
+  <div class="overflow-auto h-full">
+    <ul class="py-2" data-lookbook-preview-filter-target="items">
+      {% for name, value in sidebar_previews.items %}
+        {% if value.group_name %}
+
+          {% include 'django_lookbook/includes/sidebar_3_level.html' with value=value %}
+
+        {% else %}
+
+          {% include 'django_lookbook/includes/sidebar_2_level.html' with name=name value=value %}
+
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    <div class="hidden p-4 text-center" data-lookbook-preview-filter-target="notFoundSection">
+      <h4 class="italic opacity-50">No matching results.</h4>
+    </div>
+
+  </div>
+
+</div>

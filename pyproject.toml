@@ -1,19 +1,20 @@
 [tool.poetry]
-name = "django-viewcomponent"
-version = "1.0.5"
-description = "Build reusable components in Django, inspired by Rails ViewComponent"
+name = "django-lookbook"
+version = "0.0.2"
+description = "UI development environment for Django"
 authors = ["Michael Yin <michaelyin@accordbox.com>"]
 license = "MIT"
-homepage = "https://github.com/rails-inspire-django/django-viewcomponent"
+homepage = "https://github.com/rails-inspire-django/django-lookbook"
 readme = "README.md"
-packages = [{ include = "django_viewcomponent", from = "src" }]
+packages = [{ include = "django_lookbook", from = "src" }]
 
 [tool.poetry.urls]
-Changelog = "https://github.com/rails-inspire-django/django-viewcomponent/releases"
+Changelog = "https://github.com/rails-inspire-django/django-lookbook/releases"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-django = ">=3.0"
+django = ">=3.2"
+django-viewcomponent = ">=1.0.5"
 
 [tool.poetry.dev-dependencies]
 

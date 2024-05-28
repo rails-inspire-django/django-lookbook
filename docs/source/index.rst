@@ -1,4 +1,4 @@
-django-viewcomponent
+django-lookbook
 =====================
 
 A simple way to create reusable components in Django, inspired by Rails' ViewComponent.

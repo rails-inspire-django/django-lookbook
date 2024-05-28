@@ -1,0 +1,240 @@
+{% extends 'django_lookbook/base.html' %}
+
+{% load static %}
+
+{% block content%}
+
+  <div id="inspector"
+       class="grid hidden w-full h-full"
+       data-controller="lookbook-split-layout"
+       data-lookbook-split-layout-name-value="inspector-split"
+  >
+
+    <div
+      class="flex overflow-hidden flex-col h-full"
+      data-controller="tabs"
+      data-tabs-active-tab-class="border-primary-500"
+      data-tabs-inactive-tab-class="border-transparent"
+    >
+      <div id="main-toolbar" class="flex flex-none items-center w-full h-10 text-sm border-b border-lookbook-divider bg-lookbook-toolbar-bg" data-component="toolbar">
+        <div class="flex items-stretch w-full h-10 toolbar-sections">
+          <div class="min-w-0">
+            <div id="inspector-tabs-main" class="flex relative items-center pr-4 pl-4 mb-[-1px]">
+
+
+              <div class="flex items-stretch space-x-6 min-w-0 h-10 select-none">
+
+                <button data-tabs-target="tab" data-action="click->tabs#change:prevent"
+                        class="px-1 pt-2.5 pb-1.5 whitespace-nowrap border-b-2 cursor-pointer border-lookbook-tabs-border-active">
+                  Preview
+                </button>
+
+                <button data-tabs-target="tab" data-action="click->tabs#change:prevent"
+                        class="px-1 pt-2.5 pb-1.5 whitespace-nowrap border-b-2 cursor-pointer border-lookbook-tabs-border-active">
+                  HTML
+                </button>
+
+              </div>
+
+
+            </div>
+          </div>
+          <div class="flex-none ml-auto min-w-0">
+
+            <div class="px-2" data-component="display-options-editor" data-controller="lookbook-display-option">
+              <div data-component="display-options-field">
+                <div class="flex items-center space-x-1.5">
+                  <label for="theme" class="cursor-pointer">
+                    Theme:
+                  </label>
+                  <select
+                    name="theme"
+                    id="theme"
+                    class="compact"
+                    data-lookbook-display-option-target="select"
+                    data-action="change->lookbook-display-option#setTheme"
+                  >
+                    <option value="light">light</option>
+                    <option value="dark">dark</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex relative z-10 flex-none items-center min-w-0 border-l">
+
+            <div class="flex items-center px-2">
+              <button
+                id="copy-preview-url-button"
+                class="block p-2 focus:outline-none focus-visible:outline-none text-lookbook-icon-button-stroke hover:text-lookbook-icon-button-stroke-hover"
+                data-controller="lookbook-clipboard"
+                aria-label="Copy preview URL"
+              >
+                <i style="height: 1.0rem; width: 1.0rem; " class="icon-stroke-2" data-component="icon">
+                  <svg>
+                    <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#link"></use>
+                  </svg>
+                </i>
+              </button>
+
+              <button
+                id="refresh-preview-button"
+                aria-label="Refresh preview"
+                class="block p-2 focus:outline-none focus-visible:outline-none text-lookbook-icon-button-stroke hover:text-lookbook-icon-button-stroke-hover"
+                data-component="icon-button"
+                data-controller="tooltip lookbook-iframe-refresh"
+                data-tippy-content="Refresh preview"
+                data-action="click->lookbook-iframe-refresh#refresh"
+              >
+                <i style="height: 1.0rem; width: 1.0rem; "
+                   class="icon-stroke-2"
+                   data-component="icon">
+                  <svg>
+                    <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#refresh-cw"></use>
+                  </svg>
+                </i>
+              </button>
+
+
+              <a target="_blank"
+                 id="open-preview-button"
+                 data-controller="tooltip lookbook-open-preview"
+                 data-action="click->lookbook-open-preview#openUrl"
+                 data-tippy-content="Open preview in new window"
+                 href="#"
+                 class="block p-2 text-gray-800 hover:text-gray-800 focus:outline-none focus-visible:outline-none text-lookbook-icon-button-stroke hover:text-lookbook-icon-button-stroke-hover"
+              >
+                <i style="height: 1.0rem; width: 1.0rem; " class="icon-stroke-2"
+                   data-component="icon">
+                  <svg>
+                    <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#external-link"></use>
+                  </svg>
+                </i>
+              </a>
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="overflow-auto relative h-full">
+        <div id="inspector-panels-main" class="h-full">
+
+          <div class="hidden h-full" data-tabs-target="panel">
+            <div class="h-full">
+              <iframe id="preview-iframe" class="w-full h-full" src="{{ absolute_preview_url }}"></iframe>
+            </div>
+          </div>
+          <div class="hidden h-full" data-tabs-target="panel">
+            <div class="h-full" data-controller="lookbook-highlight">
+                    <pre class="lookbook-pre"><code class="h-full language-html">{{ preview_html }}</code></pre>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="relative z-50 bg-gray-200" >
+      <div class="absolute z-10 w-full bg-transparent transition-all -translate-y-1/2 h-[9px] cursor-[row-resize] split-layout-gutter-horizontal hover:bg-lookbook-draggable-hint"></div>
+    </div>
+
+    <div class="flex overflow-hidden flex-col h-full"
+         data-controller="tabs"
+         data-tabs-active-tab-class="border-primary-500"
+         data-tabs-inactive-tab-class="border-transparent"
+    >
+      <div id="drawer-toolbar" class="flex flex-none items-center w-full h-10 text-sm border-b border-lookbook-divider bg-lookbook-toolbar-bg">
+        <div class="min-w-0">
+          <div id="inspector-tabs-drawer" class="flex relative items-center pr-4 pl-4 mb-[-1px]">
+
+            <div class="flex items-stretch space-x-6 min-w-0 h-10 select-none">
+
+              <button data-tabs-target="tab" data-action="click->tabs#change:prevent"
+                      class="px-1 pt-2.5 pb-1.5 whitespace-nowrap border-b-2 cursor-pointer border-lookbook-tabs-border-active">
+                Source
+              </button>
+
+              <button data-tabs-target="tab" data-action="click->tabs#change:prevent"
+                      class="px-1 pt-2.5 pb-1.5 whitespace-nowrap border-b-2 cursor-pointer border-lookbook-tabs-border-active {% if not doc %}text-gray-300 hover:text-gray-300{% endif %}">
+                Notes
+              </button>
+
+              <button data-tabs-target="tab" data-action="click->tabs#change:prevent"
+                      class="px-1 pt-2.5 pb-1.5 whitespace-nowrap border-b-2 cursor-pointer border-lookbook-tabs-border-active {% if not form %}text-gray-300 hover:text-gray-300{% endif %}">
+                Params
+              </button>
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <div class="overflow-auto h-full">
+        <div id="inspector-panels-drawer" class="h-full">
+          <div class="h-full">
+
+            <div class="hidden h-full" data-tabs-target="panel">
+              <div class="h-full" data-controller="lookbook-highlight">
+                      <pre class="lookbook-pre"><code class="language-python">{{ preview_source }}</code></pre>
+              </div>
+            </div>
+            <div class="hidden" data-tabs-target="panel">
+              <div
+                data-controller="markdown"
+                data-content="{{ doc|escape }}"
+                class="p-4 w-full max-w-full h-full prose-sm"
+              ></div>
+            </div>
+
+            <div class="hidden" data-tabs-target="panel">
+              <div data-component="params-editor" class="overflow-hidden" data-controller="lookbook-params-editor">
+                {% if form %}
+                  <table class="w-full border-collapse">
+                    <thead>
+                      <tr>
+                        <th class="param-label">Param</th>
+                        <th class="param-description">Description</th>
+                        <th class="param-input">Input</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for field in form %}
+                        <tr class="" data-component="params-field">
+                          <td class="param-label">
+                            <label for="{{ field.id_for_label }}">
+                              <span class="mr-0.5">{{ field.label }}</span>
+                            </label>
+                          </td>
+                          <td class="param-description">
+                            <p class="opacity-40">{{ field.help_text|default_if_none:'—' }}</p>
+                          </td>
+                          <td class="param-input">
+                            <div class="param-input-wrapper">
+                              {{ field }}
+                            </div>
+                          </td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                {% endif %}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+  </div>
+
+{% endblock %}

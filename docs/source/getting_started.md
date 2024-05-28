@@ -3,7 +3,7 @@
 Create *components/example/example.py*
 
 ```python
-from django_viewcomponent import component
+from django_lookbook import component
 
 
 @component.register("example")

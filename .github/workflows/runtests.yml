@@ -1,13 +1,61 @@
 name: Runs tests
 
 on:
-  pull_request:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}-django-check
+  cancel-in-progress: true
 
 jobs:
+
+  code-style-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+      - name: Install dependencies
+        run: |
+          pip install -r requirements-dev.txt
+      - name: Check code style
+        run: |
+          pre-commit run --all-files
+
+  frontend-build:
+    needs: code-style-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Fix permissions issue
+        run: chmod -R 0777 frontend
+      - name: npm install, build
+        run: |
+          npm ci
+          npm run build
+      - name: Archive artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-build
+          path: |
+            src/django_lookbook/static
+
   runtests:
+    needs: frontend-build
     runs-on: ubuntu-latest
     env:
       CHANNELS_REDIS: redis://localhost:6379/0
@@ -21,6 +69,10 @@ jobs:
           - 6379:6379
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: frontend-build
+          path: src/django_lookbook/static
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:

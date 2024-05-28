@@ -1,0 +1,112 @@
+{% load static %}
+
+{% with group_name=value.group_name previews=value.previews %}
+  <li data-controller="lookbook-sidebar-toggle"
+      data-action="sidebar-active->lookbook-sidebar-toggle#show"
+  >
+    <button
+      data-action="click->lookbook-sidebar-toggle#toggle touch->lookbook-sidebar-toggle#toggle"
+      data-lookbook-sidebar-toggle-target="button"
+      class="flex items-center pt-1 pb-1 pl-4 w-full transition-all duration-150 ease-in cursor-pointer select-none hover:bg-gray-100"
+      style="padding-left: 24px"
+    >
+      <span class="flex relative items-center w-full">
+
+        <i style="height: 0.75rem; width: 0.75rem;"
+           class="hidden absolute mr-1 icon-stroke-2 left-[-1rem]"
+           data-component="lookbook-icon"
+           data-lookbook-sidebar-toggle-target="openArrow">
+          <svg>
+            <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#chevron-down"></use>
+          </svg>
+        </i>
+
+        <i style="height: 0.75rem; width: 0.75rem;"
+           class="hidden absolute mr-1 icon-stroke-2 left-[-1rem]"
+           data-component="lookbook-icon"
+           data-lookbook-sidebar-toggle-target="closeArrow">
+          <svg>
+            <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#chevron-right"></use>
+          </svg>
+        </i>
+
+        <i style="height: 0.875rem; width: 0.875rem; " class="mr-1.5 text-indigo-500 icon-stroke-2" data-component="icon">
+          <svg>
+            <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#folder"></use>
+          </svg>
+        </i>
+
+        <span class="truncate">{{ group_name }}</span>
+      </span>
+    </button>
+    <ul data-lookbook-sidebar-toggle-target="toggleable" class="hidden">
+      {% for preview_name, preview in previews.items %}
+        <li
+          data-controller="lookbook-sidebar-toggle"
+          data-action="sidebar-active->lookbook-sidebar-toggle#show"
+        >
+          <button
+            data-action="click->lookbook-sidebar-toggle#toggle touch->lookbook-sidebar-toggle#toggle"
+            data-lookbook-sidebar-toggle-target="button"
+            class="flex items-center pt-1 pb-1 pl-4 w-full transition-all duration-150 ease-in cursor-pointer select-none hover:bg-gray-100"
+            style="padding-left: 36px"
+          >
+            <span class="flex relative items-center w-full">
+
+              <i style="height: 0.75rem; width: 0.75rem;"
+                 class="hidden absolute mr-1 icon-stroke-2 left-[-1rem]"
+                 data-component="lookbook-icon"
+                 data-lookbook-sidebar-toggle-target="openArrow">
+                <svg>
+                  <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#chevron-down"></use>
+                </svg>
+              </i>
+
+              <i style="height: 0.75rem; width: 0.75rem;"
+                 class="hidden absolute mr-1 icon-stroke-2 left-[-1rem]"
+                 data-component="lookbook-icon"
+                 data-lookbook-sidebar-toggle-target="closeArrow">
+                <svg>
+                  <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#chevron-right"></use>
+                </svg>
+              </i>
+
+              <i style="height: 0.875rem; width: 0.875rem; " class="mr-1.5 text-indigo-500 icon-stroke-2" data-component="icon">
+                <svg>
+                  <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#layers"></use>
+                </svg>
+              </i>
+
+              <span class="truncate">{{ preview_name }}</span>
+
+            </span>
+          </button>
+
+          <ul data-lookbook-sidebar-toggle-target="toggleable" class="hidden">
+            {% for example in preview.examples %}
+              <li>
+                <a href="{% url 'django_lookbook:index' %}inspect{{ preview.url }}{{ example }}"
+                   class="flex items-center pt-1 pb-1 pl-4 w-full text-gray-800 transition-all duration-150 ease-in cursor-pointer select-none hover:text-gray-900"
+                   style="padding-left: 48px"
+                   data-controller="lookbook-sidebar-link"
+                >
+                  <div class="flex relative items-center w-full">
+                    <i style="height: 0.875rem; width: 0.875rem; "
+                       class="mr-1.5 text-indigo-500 icon-stroke-2" data-component="icon">
+                      <svg>
+                        <use href="{% static 'lookbook/vendors/images/lucide-sprite.svg' %}#eye"></use>
+                      </svg>
+                    </i>
+                    <span class="truncate">{{ example }}</span>
+                  </div>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+
+        </li>
+      {% endfor %}
+    </ul>
+
+  </li>
+{% endwith %}

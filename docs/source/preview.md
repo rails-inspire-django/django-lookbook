@@ -19,7 +19,7 @@ VIEW_COMPONENTS = {
 Add below url path to your Django urls
 
 ```python
-path("previews/", include("django_viewcomponent.urls")),
+path("previews/", include("django_lookbook.urls")),
 ```
 
 So all the previews will work on the `/previews` path, I'd like to do that when `DEBUG` is `True`.
@@ -39,7 +39,7 @@ Notes:
 
 ```python
 from django.template import Context, Template
-from django_viewcomponent.preview import ViewComponentPreview
+from django_lookbook.preview import ViewComponentPreview
 
 
 class ModalComponentPreview(ViewComponentPreview):
@@ -92,4 +92,4 @@ The great thing is, we can also see the source code of the preview, which helps 
 
 ## Override Templates
 
-You can also override the templates to fit your needs, please check the template files under `django_viewcomponent/templates/django_viewcomponent` to learn more.
+You can also override the templates to fit your needs, please check the template files under `django_lookbook/templates/django_lookbook` to learn more.
