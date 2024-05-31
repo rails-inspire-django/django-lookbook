@@ -1,7 +1,7 @@
 django-lookbook
 =====================
 
-A simple way to create reusable components in Django, inspired by Rails' ViewComponent.
+Empower your Django development with this pluggable app for creating a robust component library. Includes preview system, documentation engine, and parameter editor for building modular UI effortlessly.
 
 Topics
 ------
@@ -10,10 +10,4 @@ Topics
    :maxdepth: 2
 
    install.md
-   overview.md
-   getting_started.md
-   slot.md
-   templates.md
-   context.md
-   preview.md
-   testing.md
+   write_preview.md
