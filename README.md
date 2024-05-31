@@ -11,4 +11,4 @@
 
 </div>
 
-[![Django Lookbook UI](.github/assets/lookbook_ui.png)](https://github.com/rails-inspire-django/django-lookbook)
+![Django Lookbook UI](.github/assets/lookbook_ui.png)
