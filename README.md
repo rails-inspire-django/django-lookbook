@@ -1,6 +1,7 @@
-# README
-
 <div align="center">
+
+<h2>Django Lookbook</h2>
+
 <p>Empower your Django development with this pluggable app for creating a robust component library. Includes preview system, documentation engine, and parameter editor for building modular UI effortlessly.</p>
 
 <p><strong><a href="https://django-lookbook.readthedocs.io/en/latest/">Documentation</a> &nbsp;|&nbsp; <a href="https://saashammer.com/lookbook/">Demo site</a></strong></p>
