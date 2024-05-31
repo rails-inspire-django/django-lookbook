@@ -97,7 +97,7 @@ Each time we visit a preview, the method would be called and the final result wo
 
 ## Override Template
 
-In some cases, you might need to render HTML code which need work with CSS and JS. You can override the `preview` template to include them.
+In some cases, you might need to render HTML code which need work with your own CSS and JS. You can override the `preview` template to include them.
 
 Create *django_viewcomponent/preview.html* in the project `templates` directory
 
