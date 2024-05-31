@@ -1,6 +1,6 @@
 <div align="center">
 
-<h2>Django Lookbook</h2>
+<h1>Django Lookbook</h1>
 
 <p>Empower your Django development with this pluggable app for creating a robust component library. Includes preview system, documentation engine, and parameter editor for building modular UI effortlessly.</p>
 
