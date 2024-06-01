@@ -9,6 +9,8 @@ const projectPaths = [
   Path.join(pwd, "./src/django_lookbook/templates/**/*.html"),
   // add js file paths if you need
   Path.join(pwd, "./node_modules/tailwindcss-stimulus-components/dist/*.js"),
+  // safelist
+  Path.join(pwd, "./safelist.txt"),
 ];
 
 const contentPaths = [...projectPaths];
