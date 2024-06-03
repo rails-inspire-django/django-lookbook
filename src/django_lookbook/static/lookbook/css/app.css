@@ -1653,6 +1653,8 @@ select {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, var(--tw-text-opacity));
+}.underline {
+  text-decoration-line: underline;
 }.opacity-0 {
   opacity: 0;
 }.opacity-100 {
@@ -1769,6 +1771,8 @@ select {
   --tw-text-opacity: 1;
   color: rgba(17, 24, 39, 1);
   color: rgba(17, 24, 39, var(--tw-text-opacity));
+}.hover\:underline:hover {
+  text-decoration-line: underline;
 }.focus\:border-blue-300:focus {
   --tw-border-opacity: 1;
   border-color: rgba(147, 197, 253, 1);
