@@ -11,3 +11,4 @@ Topics
 
    install.md
    write_preview.md
+   contributing.md
