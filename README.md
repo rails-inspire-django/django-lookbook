@@ -12,3 +12,32 @@
 </div>
 
 ![Django Lookbook UI](.github/assets/lookbook_ui.png)
+
+## Features
+
+- Auto-detect and render the previews
+- Filter previews in real-time
+- Draggable and resizable layout
+- Auto extract documentation from the preview doc string
+- Powerful parameter editor, which allows the user to check UI in real-time (for example: change button text and color)
+- This app is **pluggable** and can be integrated with any Django project
+
+## Techs
+
+This project is a reusable Django app that uses the following technologies:
+
+1. Tailwind CSS for styling
+2. Stimulus JS for interactivity
+3. django-viewcomponent for preview discovery and rendering
+
+## Storybook Controls
+
+> Storybook Controls gives you a graphical UI to interact with a component's arguments dynamically without needing to code. It creates an addon panel next to your component examples ("stories"), so you can edit them live.
+
+django-lookbook provides simple way to let developer use classic Django form to add `Params Editor` to the preview, which allow user to interact with the preview in real-time.
+
+![Params Editor](.github/assets/params-editor.gif)
+
+## Special Thanks
+
+This project is heavily inspired by [lookbook](https://github.com/lookbook-hq/lookbook) from the Rails community.
