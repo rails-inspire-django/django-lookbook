@@ -2,7 +2,7 @@ import inspect
 import re
 from typing import Dict, Type
 
-from django_viewcomponent.app_settings import app_settings
+from .app_settings import app_settings
 
 pattern = re.compile(r"(?<!^)(?=[A-Z])")
 

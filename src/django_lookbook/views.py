@@ -9,10 +9,10 @@ from django.http import Http404
 from django.shortcuts import render
 from django.template.loader import select_template
 from django.urls import reverse
-from django_viewcomponent.app_settings import app_settings
 from django_viewcomponent.preview import ViewComponentPreview
 
-from django_lookbook.preview import LookbookPreview
+from .app_settings import app_settings
+from .preview import LookbookPreview
 
 cached_previews = None
 cached_sidebar_previews = None
