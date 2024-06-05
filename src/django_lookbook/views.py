@@ -138,7 +138,18 @@ def inspect_view(request, slug):
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
-    fun = getattr(preview_instance, example_name)
+    fun = getattr(preview_instance, example_name, None)
+    if fun is None:
+        return render(
+            request,
+            "django_lookbook/404.html",
+            context={
+                "sidebar_previews": sidebar_previews,
+                "previews": get_previews(),
+            },
+            status=404,
+        )
+
     preview_html = fun(**query_dict)
 
     method = getattr(preview_instance, example_name)
@@ -198,7 +209,10 @@ def preview_view(request, slug):
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
-    fun = getattr(preview_instance, example_name)
+    fun = getattr(preview_instance, example_name, None)
+    if fun is None:
+        return render(request, "django_lookbook/404.html", status=404)
+
     preview_html = fun(**query_dict)
 
     context = {
