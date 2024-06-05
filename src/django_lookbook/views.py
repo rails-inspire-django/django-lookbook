@@ -5,6 +5,7 @@ import urllib.parse
 from pathlib import Path
 
 from django.conf import settings
+from django.http import Http404
 from django.shortcuts import render
 from django.urls import reverse
 from django_viewcomponent.app_settings import app_settings
@@ -211,7 +212,7 @@ def preview_view(request, slug):
     query_dict = request_get_to_dict(request)
     fun = getattr(preview_instance, example_name, None)
     if fun is None:
-        return render(request, "django_lookbook/404.html", status=404)
+        raise Http404
 
     preview_html = fun(**query_dict)
 
