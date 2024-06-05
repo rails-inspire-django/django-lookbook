@@ -41,7 +41,7 @@
     <ul data-lookbook-sidebar-toggle-target="toggleable" class="hidden">
       {% for example in preview.examples %}
         <li>
-          <a href="{% url 'django_lookbook:index' %}inspect{{ preview.url }}{{ example }}"
+          <a href="{% url 'django_lookbook:index' %}inspect/{{ preview.preview_name }}/{{ example }}/"
              class="flex items-center pt-1 pb-1 pl-4 w-full text-gray-800 transition-all duration-150 ease-in cursor-pointer select-none hover:text-gray-900"
              style="padding-left: 36px"
              data-controller="lookbook-sidebar-link"
