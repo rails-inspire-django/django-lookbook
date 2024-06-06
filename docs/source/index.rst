@@ -10,5 +10,7 @@ Topics
    :maxdepth: 2
 
    install.md
+   install_with_viewcomponent.md
    write_preview.md
+   params.md
    contributing.md

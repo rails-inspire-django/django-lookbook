@@ -1338,6 +1338,8 @@ select {
   margin-right: auto;
 }.-mt-px {
   margin-top: -1px;
+}.mb-2 {
+  margin-bottom: 0.5rem;
 }.mb-8 {
   margin-bottom: 2rem;
 }.mb-\[-1px\] {
@@ -1475,6 +1477,9 @@ select {
 }.items-stretch {
   -webkit-box-align: stretch;
           align-items: stretch;
+}.justify-center {
+  -webkit-box-pack: center;
+          justify-content: center;
 }.space-x-1 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(0.25rem * 0);
@@ -1621,14 +1626,22 @@ select {
   padding-top: 0.625rem;
 }.text-center {
   text-align: center;
+}.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }.text-5xl {
   font-size: 3rem;
+  line-height: 1;
+}.text-6xl {
+  font-size: 3.75rem;
   line-height: 1;
 }.text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }.font-black {
   font-weight: 900;
+}.font-bold {
+  font-weight: 700;
 }.font-medium {
   font-weight: 500;
 }.uppercase {
@@ -1649,6 +1662,10 @@ select {
   --tw-text-opacity: 1;
   color: rgba(99, 102, 241, 1);
   color: rgba(99, 102, 241, var(--tw-text-opacity));
+}.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgba(239, 68, 68, 1);
+  color: rgba(239, 68, 68, var(--tw-text-opacity));
 }.text-white {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, 1);
@@ -1836,6 +1853,12 @@ select {
   .sm\:px-6 {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+}@media (min-width: 768px) {
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }@media (min-width: 1024px) {
 

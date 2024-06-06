@@ -5,10 +5,14 @@ import urllib.parse
 from pathlib import Path
 
 from django.conf import settings
+from django.http import Http404
 from django.shortcuts import render
+from django.template.loader import select_template
 from django.urls import reverse
-from django_viewcomponent.app_settings import app_settings
 from django_viewcomponent.preview import ViewComponentPreview
+
+from .app_settings import app_settings
+from .preview import LookbookPreview
 
 cached_previews = None
 cached_sidebar_previews = None
@@ -61,9 +65,15 @@ def get_previews():
         return cached_previews
 
     new_previews = {}
+
+    # for ViewComponentPreview
     for key, value in ViewComponentPreview.previews.items():
         new_key = key.replace("_component", "")
         new_previews[new_key] = value
+
+    # for LookbookPreview
+    for key, value in LookbookPreview.previews.items():
+        new_previews[key] = value
 
     cached_previews = new_previews
     return new_previews
@@ -105,6 +115,31 @@ def get_sidebar_previews():
 
                 break
 
+    for key, value in LookbookPreview.previews.items():
+        preview_path = value.preview_view_component_path
+
+        for base in preview_base_ls:
+            if str(preview_path).startswith(str(base)):
+                relative_preview_path = Path(preview_path).relative_to(base)
+                num_levels = len(relative_preview_path.parts)
+                if num_levels == 1:
+                    new_key = key
+                    new_previews[new_key] = value
+                else:
+                    group_name = relative_preview_path.parts[0]
+                    # check if new_previews contains the group or not
+                    if group_name in new_previews:
+                        group = new_previews[group_name]
+                        new_key = key
+                        group.previews[new_key] = value
+                    else:
+                        group = PreviewGroup(group_name)
+                        new_previews[group_name] = group
+                        new_key = key
+                        group.previews[new_key] = value
+
+                break
+
     cached_sidebar_previews = new_previews
     return new_previews
 
@@ -132,13 +167,24 @@ def index_view(request):
 def inspect_view(request, slug):
     sidebar_previews = get_sidebar_previews()
 
-    _, preview_name, example_name = slug.split("/")
+    preview_name, example_name = slug.split("/")
 
     preview_cls = get_previews()[preview_name.replace("_component", "")]
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
-    fun = getattr(preview_instance, example_name)
+    fun = getattr(preview_instance, example_name, None)
+    if fun is None:
+        return render(
+            request,
+            "django_lookbook/404.html",
+            context={
+                "sidebar_previews": sidebar_previews,
+                "previews": get_previews(),
+            },
+            status=404,
+        )
+
     preview_html = fun(**query_dict)
 
     method = getattr(preview_instance, example_name)
@@ -192,13 +238,16 @@ def preview_view(request, slug):
     except json.JSONDecodeError:
         theme = "light"
 
-    _, preview_name, example_name = slug.split("/")
+    preview_name, example_name = slug.split("/")
 
     preview_cls = get_previews()[preview_name.replace("_component", "")]
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
-    fun = getattr(preview_instance, example_name)
+    fun = getattr(preview_instance, example_name, None)
+    if fun is None:
+        raise Http404
+
     preview_html = fun(**query_dict)
 
     context = {
@@ -207,5 +256,9 @@ def preview_view(request, slug):
         "preview_source": "",
         "theme": theme,
     }
-
-    return render(request, "django_viewcomponent/preview.html", context)
+    template_names = [
+        "django_lookbook/preview.html",
+        "django_viewcomponent/preview.html",
+    ]
+    template = select_template(template_names)
+    return render(request, template.template.name, context)

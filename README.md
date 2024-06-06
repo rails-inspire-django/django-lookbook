@@ -26,9 +26,8 @@
 
 This project is a reusable Django app that uses the following technologies:
 
-1. Tailwind CSS for styling
-2. Stimulus JS for interactivity
-3. django-viewcomponent for preview discovery and rendering
+1. [Tailwind CSS](https://tailwindcss.com/)
+2. [Stimulus JS](https://stimulus.hotwire.dev/)
 
 ## Storybook Controls
 

@@ -33,7 +33,7 @@ class TestLookBook:
         assert b"with_template_render" in response.content
 
     def test_inspect(self, client):
-        slug = "/".join(["previews", "simple_example_component", "with_title"])
+        slug = "/".join(["simple_example_component", "with_title"])
         response = client.get(
             reverse(
                 "django_lookbook:inspect",
