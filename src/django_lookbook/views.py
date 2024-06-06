@@ -169,7 +169,18 @@ def inspect_view(request, slug):
 
     preview_name, example_name = slug.split("/")
 
-    preview_cls = get_previews()[preview_name.replace("_component", "")]
+    preview_cls = get_previews().get(preview_name.replace("_component", ""), None)
+    if not preview_cls:
+        return render(
+            request,
+            "django_lookbook/404.html",
+            context={
+                "sidebar_previews": sidebar_previews,
+                "previews": get_previews(),
+            },
+            status=404,
+        )
+
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
@@ -240,7 +251,10 @@ def preview_view(request, slug):
 
     preview_name, example_name = slug.split("/")
 
-    preview_cls = get_previews()[preview_name.replace("_component", "")]
+    preview_cls = get_previews().get(preview_name.replace("_component", ""), None)
+    if not preview_cls:
+        raise Http404
+
     preview_instance = preview_cls()
 
     query_dict = request_get_to_dict(request)
