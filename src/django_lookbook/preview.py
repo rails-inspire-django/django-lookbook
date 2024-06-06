@@ -1,4 +1,5 @@
 import inspect
+import os
 import re
 from typing import Dict, Type
 
@@ -36,7 +37,7 @@ class LookbookPreview:
             new_name = camel_to_snake(name)
             LookbookPreview.previews[new_name] = cls
             cls.preview_name = new_name
-            cls.preview_view_component_path = inspect.getfile(cls)
+            cls.preview_view_component_path = os.path.abspath(inspect.getfile(cls))
 
     @classmethod
     def examples(cls):
