@@ -13,4 +13,5 @@ Topics
    install_with_viewcomponent.md
    write_preview.md
    params.md
+   dark.md
    contributing.md
